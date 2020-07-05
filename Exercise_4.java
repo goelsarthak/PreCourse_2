@@ -6,6 +6,39 @@ class MergeSort
     void merge(int arr[], int l, int m, int r) 
     {  
        //Your code here  
+        int[] temp = new temp[r-l+1];
+        int i = l;
+        int j = m+1;
+        int k = 0;
+
+        while(i<=m && j<=r){
+            if(arr[i]<=arr[j]){
+                temp[k] = arr[i];
+                i++;
+            } else{
+                temp[k] = arr[j];
+                j++;
+            }
+            k++;
+        }
+
+        if(i>m){
+            while(j<=r){
+                temp[k] = arr[j];
+                j++;
+                k++;
+            }
+        } else{
+            while(i<=m){
+                temp[k] = arr[i];
+                i++;
+                k++;
+            }
+        }
+
+        for(int x = l; x<=r; x++){
+            arr[x] = temp[x-l];
+        }
     } 
   
     // Main function that sorts arr[l..r] using 
@@ -14,6 +47,12 @@ class MergeSort
     { 
 	//Write your code here
         //Call mergeSort from here 
+        if(l<r){
+            int mid = l+(r-l)/2;
+            sort(arr, l, mid);
+            sort(arr, mid+1, r);
+            merge(arr,l,mid,r)
+        }
     } 
   
     /* A utility function to print array of size n */
